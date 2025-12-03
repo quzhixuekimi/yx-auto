@@ -26,7 +26,7 @@ const directDomains = [
 ];
 
 // 默认优选IP来源URL
-const defaultIPURL = 'https://www.areuok.cloudns.biz/addressesapi.txt';
+const defaultIPURL = '';
 
 // UUID验证
 function isValidUUID(str) {
