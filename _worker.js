@@ -110,7 +110,119 @@ async function fetchAndParseWetest(url) {
     }
 }
 
-// 从GitHub获取优选IP
+// 整理成数组
+async function 整理成数组(内容) {
+    var 替换后的内容 = 内容.replace(/[	"'\r\n]+/g, ',').replace(/,+/g, ',');
+    if (替换后的内容.charAt(0) == ',') 替换后的内容 = 替换后的内容.slice(1);
+    if (替换后的内容.charAt(替换后的内容.length - 1) == ',') 替换后的内容 = 替换后的内容.slice(0, 替换后的内容.length - 1);
+    const 地址数组 = 替换后的内容.split(',');
+    return 地址数组;
+}
+
+// 请求优选API
+async function 请求优选API(urls, 默认端口 = '443', 超时时间 = 3000) {
+    if (!urls?.length) return [];
+    const results = new Set();
+    await Promise.allSettled(urls.map(async (url) => {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 超时时间);
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            let text = '';
+            try {
+                const buffer = await response.arrayBuffer();
+                const contentType = (response.headers.get('content-type') || '').toLowerCase();
+                const charset = contentType.match(/charset=([^\s;]+)/i)?.[1]?.toLowerCase() || '';
+
+                // 根据 Content-Type 响应头判断编码优先级
+                let decoders = ['utf-8', 'gb2312']; // 默认优先 UTF-8
+                if (charset.includes('gb') || charset.includes('gbk') || charset.includes('gb2312')) {
+                    decoders = ['gb2312', 'utf-8']; // 如果明确指定 GB 系编码，优先尝试 GB2312
+                }
+
+                // 尝试多种编码解码
+                let decodeSuccess = false;
+                for (const decoder of decoders) {
+                    try {
+                        const decoded = new TextDecoder(decoder).decode(buffer);
+                        // 验证解码结果的有效性
+                        if (decoded && decoded.length > 0 && !decoded.includes('\ufffd')) {
+                            text = decoded;
+                            decodeSuccess = true;
+                            break;
+                        } else if (decoded && decoded.length > 0) {
+                            // 如果有替换字符 (U+FFFD)，说明编码不匹配，继续尝试下一个编码
+                            continue;
+                        }
+                    } catch (e) {
+                        // 该编码解码失败，尝试下一个
+                        continue;
+                    }
+                }
+
+                // 如果所有编码都失败或无效，尝试 response.text()
+                if (!decodeSuccess) {
+                    text = await response.text();
+                }
+
+                // 如果返回的是空或无效数据，返回
+                if (!text || text.trim().length === 0) {
+                    return;
+                }
+            } catch (e) {
+                console.error('Failed to decode response:', e);
+                return;
+            }
+            const lines = text.trim().split('\n').map(l => l.trim()).filter(l => l);
+            const isCSV = lines.length > 1 && lines[0].includes(',');
+            const IPV6_PATTERN = /^[^\[\]]*:[^\[\]]*:[^\[\]]/;
+            if (!isCSV) {
+                lines.forEach(line => {
+                    const hashIndex = line.indexOf('#');
+                    const [hostPart, remark] = hashIndex > -1 ? [line.substring(0, hashIndex), line.substring(hashIndex)] : [line, ''];
+                    let hasPort = false;
+                    if (hostPart.startsWith('[')) {
+                        hasPort = /\]:(\d+)$/.test(hostPart);
+                    } else {
+                        const colonIndex = hostPart.lastIndexOf(':');
+                        hasPort = colonIndex > -1 && /^\d+$/.test(hostPart.substring(colonIndex + 1));
+                    }
+                    const port = new URL(url).searchParams.get('port') || 默认端口;
+                    results.add(hasPort ? line : `${hostPart}:${port}${remark}`);
+                });
+            } else {
+                const headers = lines[0].split(',').map(h => h.trim());
+                const dataLines = lines.slice(1);
+                if (headers.includes('IP地址') && headers.includes('端口') && headers.includes('数据中心')) {
+                    const ipIdx = headers.indexOf('IP地址'), portIdx = headers.indexOf('端口');
+                    const remarkIdx = headers.indexOf('国家') > -1 ? headers.indexOf('国家') :
+                        headers.indexOf('城市') > -1 ? headers.indexOf('城市') : headers.indexOf('数据中心');
+                    const tlsIdx = headers.indexOf('TLS');
+                    dataLines.forEach(line => {
+                        const cols = line.split(',').map(c => c.trim());
+                        if (tlsIdx !== -1 && cols[tlsIdx]?.toLowerCase() !== 'true') return;
+                        const wrappedIP = IPV6_PATTERN.test(cols[ipIdx]) ? `[${cols[ipIdx]}]` : cols[ipIdx];
+                        results.add(`${wrappedIP}:${cols[portIdx]}#${cols[remarkIdx]}`);
+                    });
+                } else if (headers.some(h => h.includes('IP')) && headers.some(h => h.includes('延迟')) && headers.some(h => h.includes('下载速度'))) {
+                    const ipIdx = headers.findIndex(h => h.includes('IP'));
+                    const delayIdx = headers.findIndex(h => h.includes('延迟'));
+                    const speedIdx = headers.findIndex(h => h.includes('下载速度'));
+                    const port = new URL(url).searchParams.get('port') || 默认端口;
+                    dataLines.forEach(line => {
+                        const cols = line.split(',').map(c => c.trim());
+                        const wrappedIP = IPV6_PATTERN.test(cols[ipIdx]) ? `[${cols[ipIdx]}]` : cols[ipIdx];
+                        results.add(`${wrappedIP}:${port}#CF优选 ${cols[delayIdx]}ms ${cols[speedIdx]}MB/s`);
+                    });
+                }
+            }
+        } catch (e) { }
+    }));
+    return Array.from(results);
+}
+
+// 从GitHub获取优选IP（保留原有功能，同时支持优选API）
 async function fetchAndParseNewIPs(piu) {
     const url = piu || defaultIPURL;
     try {
@@ -411,22 +523,105 @@ async function handleSubscriptionRequest(request, user, customDomain, piu, ipv4E
         }
     }
 
-    // GitHub优选
+    // GitHub优选 / 优选API
     if (egi) {
         try {
-            const newIPList = await fetchAndParseNewIPs(piu);
-            if (newIPList.length > 0) {
-                // 确保至少有一个协议被启用
-                const hasProtocol = evEnabled || etEnabled || vmEnabled;
-                const useVL = hasProtocol ? evEnabled : true;  // 如果没有选择任何协议，默认使用VLESS
-                
-                if (useVL) {
-                    finalLinks.push(...generateLinksFromNewIPs(newIPList, user, nodeDomain, wsPath));
+            // 检查是否是优选API URL（以https://开头）
+            if (piu && piu.toLowerCase().startsWith('https://')) {
+                // 从优选API获取IP列表
+                const 优选API的IP = await 请求优选API([piu]);
+                if (优选API的IP && 优选API的IP.length > 0) {
+                    // 解析IP字符串格式：IP:端口#备注
+                    const IP列表 = 优选API的IP.map(原始地址 => {
+                        // 统一正则: 匹配 域名/IPv4/IPv6地址 + 可选端口 + 可选备注
+                        const regex = /^(\[[\da-fA-F:]+\]|[\d.]+|[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*)(?::(\d+))?(?:#(.+))?$/;
+                        const match = 原始地址.match(regex);
+
+                        if (match) {
+                            const 节点地址 = match[1].replace(/[\[\]]/g, ''); // 移除IPv6的方括号
+                            const 节点端口 = match[2] || 443;
+                            const 节点备注 = match[3] || 节点地址;
+                            return {
+                                ip: 节点地址,
+                                port: parseInt(节点端口),
+                                name: 节点备注
+                            };
+                        }
+                        return null;
+                    }).filter(item => item !== null);
+                    
+                    if (IP列表.length > 0) {
+                        const hasProtocol = evEnabled || etEnabled || vmEnabled;
+                        const useVL = hasProtocol ? evEnabled : true;
+                        
+                        if (useVL) {
+                            finalLinks.push(...generateLinksFromNewIPs(IP列表, user, nodeDomain, wsPath));
+                        }
+                    }
                 }
-                // GitHub IP只支持VLESS格式
+            } else if (piu && piu.includes('\n')) {
+                // 支持多行文本，包含混合格式（优选API URL + IP列表）
+                const 完整优选列表 = await 整理成数组(piu);
+                const 优选API = [], 优选IP = [], 其他节点 = [];
+                
+                for (const 元素 of 完整优选列表) {
+                    if (元素.toLowerCase().startsWith('https://')) {
+                        优选API.push(元素);
+                    } else if (元素.toLowerCase().includes('://')) {
+                        其他节点.push(元素);
+                    } else {
+                        优选IP.push(元素);
+                    }
+                }
+                
+                // 从优选API获取IP
+                if (优选API.length > 0) {
+                    const 优选API的IP = await 请求优选API(优选API);
+                    优选IP.push(...优选API的IP);
+                }
+                
+                // 解析所有IP并生成节点
+                if (优选IP.length > 0) {
+                    const IP列表 = 优选IP.map(原始地址 => {
+                        const regex = /^(\[[\da-fA-F:]+\]|[\d.]+|[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*)(?::(\d+))?(?:#(.+))?$/;
+                        const match = 原始地址.match(regex);
+
+                        if (match) {
+                            const 节点地址 = match[1].replace(/[\[\]]/g, '');
+                            const 节点端口 = match[2] || 443;
+                            const 节点备注 = match[3] || 节点地址;
+                            return {
+                                ip: 节点地址,
+                                port: parseInt(节点端口),
+                                name: 节点备注
+                            };
+                        }
+                        return null;
+                    }).filter(item => item !== null);
+                    
+                    if (IP列表.length > 0) {
+                        const hasProtocol = evEnabled || etEnabled || vmEnabled;
+                        const useVL = hasProtocol ? evEnabled : true;
+                        
+                        if (useVL) {
+                            finalLinks.push(...generateLinksFromNewIPs(IP列表, user, nodeDomain, wsPath));
+                        }
+                    }
+                }
+            } else {
+                // 原有的GitHub优选逻辑（单URL）
+                const newIPList = await fetchAndParseNewIPs(piu);
+                if (newIPList.length > 0) {
+                    const hasProtocol = evEnabled || etEnabled || vmEnabled;
+                    const useVL = hasProtocol ? evEnabled : true;
+                    
+                    if (useVL) {
+                        finalLinks.push(...generateLinksFromNewIPs(newIPList, user, nodeDomain, wsPath));
+                    }
+                }
             }
         } catch (error) {
-            console.error('获取GitHub IP失败:', error);
+            console.error('获取优选IP失败:', error);
         }
     }
 
@@ -1647,6 +1842,62 @@ export default {
                         }
                     });
                 }
+            }
+        }
+        
+        // 测试优选API API: /test-optimize-api?url=xxx&port=443
+        if (path === '/test-optimize-api') {
+            if (request.method === 'OPTIONS') {
+                return new Response(null, {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    }
+                });
+            }
+            
+            const apiUrl = url.searchParams.get('url');
+            const port = url.searchParams.get('port') || '443';
+            const timeout = parseInt(url.searchParams.get('timeout') || '3000');
+            
+            if (!apiUrl) {
+                return new Response(JSON.stringify({ 
+                    success: false, 
+                    error: '缺少url参数' 
+                }), {
+                    status: 400,
+                    headers: { 
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                });
+            }
+            
+            try {
+                const results = await 请求优选API([apiUrl], port, timeout);
+                return new Response(JSON.stringify({ 
+                    success: true, 
+                    results: results,
+                    total: results.length,
+                    message: `成功获取 ${results.length} 个优选IP`
+                }, null, 2), {
+                    headers: { 
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                });
+            } catch (error) {
+                return new Response(JSON.stringify({ 
+                    success: false, 
+                    error: error.message 
+                }), {
+                    status: 500,
+                    headers: { 
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                });
             }
         }
         
