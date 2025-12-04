@@ -16,14 +16,12 @@ let scu = 'https://url.v1.mk/sub';  // 订阅转换地址
 const directDomains = [
     { name: "cloudflare.182682.xyz", domain: "cloudflare.182682.xyz" },
     { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
-    { name: "www.visa.com.sg", domain: "www.visa.com.sg" },
     { name: "cf.0sm.com", domain: "cf.0sm.com" },
     { name: "cf.090227.xyz", domain: "cf.090227.xyz" },
     { name: "cf.zhetengsha.eu.org", domain: "cf.zhetengsha.eu.org" },
     { name: "cfip.1323123.xyz", domain: "cfip.1323123.xyz" },
     { name: "cloudflare-ip.mofashi.ltd", domain: "cloudflare-ip.mofashi.ltd" },
     { name: "xn--b6gac.eu.org", domain: "xn--b6gac.eu.org" },
-    { name: "www.visa.com.hk", domain: "www.visa.com.hk" },
     { name: "skk.moe", domain: "skk.moe" },
     { name: "ip.sb", domain: "ip.sb" }
 ];
