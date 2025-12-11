@@ -17,7 +17,6 @@ const directDomains = [
     { name: "cloudflare.182682.xyz", domain: "cloudflare.182682.xyz" },
     { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
     { name: "cf.0sm.com", domain: "cf.0sm.com" },
-    { name: "cf.090227.xyz", domain: "cf.090227.xyz" },
     { name: "cfip.1323123.xyz", domain: "cfip.1323123.xyz" },
     { name: "cloudflare-ip.mofashi.ltd", domain: "cloudflare-ip.mofashi.ltd" },
     { name: "xn--b6gac.eu.org", domain: "xn--b6gac.eu.org" },
@@ -25,7 +24,8 @@ const directDomains = [
     { name: "time.is", domain: "time.is" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "www.gco.gov.qa", domain: "www.gco.gov.qa" },
-    { name: "ip.sb", domain: "ip.sb" }
+    { name: "ip.sb", domain: "ip.sb" },
+    { name: "singapore.com", domain: "singapore.com" }
 ];
 
 // 默认优选IP来源URL
