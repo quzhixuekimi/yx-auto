@@ -25,6 +25,10 @@ const directDomains = [
     { name: "shopify.com", domain: "shopify.com" },
     { name: "www.gco.gov.qa", domain: "www.gco.gov.qa" },
     { name: "ip.sb", domain: "ip.sb" },
+     { name: "store.ubi.com", domain: "store.ubi.com" },
+     { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
+     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
+     { name: "bpb.yousef.isegaro.com", domain: "bpb.yousef.isegaro.com" },
     { name: "singapore.com", domain: "singapore.com" }
 ];
 
