@@ -28,7 +28,6 @@ const directDomains = [
      { name: "store.ubi.com", domain: "store.ubi.com" },
      { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
      { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
-     { name: "bpb.yousef.isegaro.com", domain: "bpb.yousef.isegaro.com" },
     { name: "singapore.com", domain: "singapore.com" }
 ];
 
