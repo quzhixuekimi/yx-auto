@@ -14,7 +14,6 @@ let scu = 'https://url.v1.mk/sub';  // 订阅转换地址
 
 // 默认优选域名列表
 const directDomains = [
-    { name: "cloudflare.182682.xyz", domain: "cloudflare.182682.xyz" },
     { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
     { name: "cf.0sm.com", domain: "cf.0sm.com" },
     { name: "cfip.1323123.xyz", domain: "cfip.1323123.xyz" },
@@ -23,11 +22,10 @@ const directDomains = [
     { name: "skk.moe", domain: "skk.moe" },
     { name: "time.is", domain: "time.is" },
     { name: "shopify.com", domain: "shopify.com" },
-    { name: "www.gco.gov.qa", domain: "www.gco.gov.qa" },
     { name: "ip.sb", domain: "ip.sb" },
-     { name: "store.ubi.com", domain: "store.ubi.com" },
-     { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
-     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
+    { name: "store.ubi.com", domain: "store.ubi.com" },
+    { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
+    { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "singapore.com", domain: "singapore.com" }
 ];
 
