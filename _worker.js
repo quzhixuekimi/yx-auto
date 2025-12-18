@@ -19,7 +19,6 @@ const directDomains = [
     { name: "cfip.1323123.xyz", domain: "cfip.1323123.xyz" },
     { name: "cloudflare-ip.mofashi.ltd", domain: "cloudflare-ip.mofashi.ltd" },
     { name: "xn--b6gac.eu.org", domain: "xn--b6gac.eu.org" },
-    { name: "skk.moe", domain: "skk.moe" },
     { name: "time.is", domain: "time.is" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "ip.sb", domain: "ip.sb" },
