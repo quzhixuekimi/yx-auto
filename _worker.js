@@ -19,12 +19,23 @@ const directDomains = [
     { name: "cfip.1323123.xyz", domain: "cfip.1323123.xyz" },
     { name: "cloudflare-ip.mofashi.ltd", domain: "cloudflare-ip.mofashi.ltd" },
     { name: "xn--b6gac.eu.org", domain: "xn--b6gac.eu.org" },
-    { name: "time.is", domain: "time.is" },
+    
+    { name: "store.ubi.com", domain: "store.ubi.com" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "store.ubi.com", domain: "store.ubi.com" },
     { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
+    
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
+    { name: "nekocloud.tencentapp.cn", domain: "nekocloud.tencentapp.cn" },
+    { name: "saas.sin.fan", domain: "saas.sin.fan" },
+    { name: "skk.moe", domain: "skk.moe" },
+    { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
+
+    { name: "time.is", domain: "time.is" },
+    { name: "bpb.yousef.isegaro.com", domain: "bpb.yousef.isegaro.com" },
+    { name: "proxyip.cmliussss.net", domain: "proxyip.cmliussss.net" },
+    { name: "proxyip.fxxk.dedyn.io", domain: "proxyip.fxxk.dedyn.io" },
     { name: "singapore.com", domain: "singapore.com" }
 ];
 
