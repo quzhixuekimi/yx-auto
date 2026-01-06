@@ -33,7 +33,7 @@ const directDomains = [
     { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
 
     { name: "time.is", domain: "time.is" },
-    { name: "bpb.yousef.isegaro.com", domain: "bpb.yousef.isegaro.com" },
+    { name: "www.okcupid.com", domain: "www.okcupid.com" },
     { name: "proxyip.cmliussss.net", domain: "proxyip.cmliussss.net" },
     { name: "proxyip.fxxk.dedyn.io", domain: "proxyip.fxxk.dedyn.io" },
     { name: "singapore.com", domain: "singapore.com" }
