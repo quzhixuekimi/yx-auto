@@ -14,29 +14,30 @@ let scu = 'https://url.v1.mk/sub';  // 订阅转换地址
 
 // 默认优选域名列表
 const directDomains = [
-    { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
+    { name: "alejandracaiccedo.com", domain: "alejandracaiccedo.com" },
+    
     { name: "cf.0sm.com", domain: "cf.0sm.com" },
     { name: "cfip.1323123.xyz", domain: "cfip.1323123.xyz" },
     { name: "cloudflare-ip.mofashi.ltd", domain: "cloudflare-ip.mofashi.ltd" },
-    { name: "xn--b6gac.eu.org", domain: "xn--b6gac.eu.org" },
+    { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
+    { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
     
-    { name: "store.ubi.com", domain: "store.ubi.com" },
-    { name: "shopify.com", domain: "shopify.com" },
+    { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
-    { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
-    
-    { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
-    { name: "nekocloud.tencentapp.cn", domain: "nekocloud.tencentapp.cn" },
-    { name: "saas.sin.fan", domain: "saas.sin.fan" },
-    { name: "skk.moe", domain: "skk.moe" },
-    { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
 
-    { name: "time.is", domain: "time.is" },
-    { name: "www.okcupid.com", domain: "www.okcupid.com" },
     { name: "proxyip.cmliussss.net", domain: "proxyip.cmliussss.net" },
     { name: "proxyip.fxxk.dedyn.io", domain: "proxyip.fxxk.dedyn.io" },
-    { name: "singapore.com", domain: "singapore.com" }
+    { name: "store.ubi.com", domain: "store.ubi.com" },
+    { name: "shopify.com", domain: "shopify.com" },
+    { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
+    { name: "saas.sin.fan", domain: "saas.sin.fan" },
+    { name: "skk.moe", domain: "skk.moe" },
+    
+    { name: "xn--b6gac.eu.org", domain: "xn--b6gac.eu.org" },
+    { name: "www.whoer.net", domain: "www.whoer.net" },
+    { name: "www.csgo.com", domain: "www.csgo.com" },
+    { name: "www.okcupid.com", domain: "www.okcupid.com" }
 ];
 
 // 默认优选IP来源URL
