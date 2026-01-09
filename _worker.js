@@ -20,11 +20,11 @@ const directDomains = [
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
 
-    { name: "edgetunnel.anycast.eu.org", domain: "edgetunnel.anycast.eu.org" },
+    { name: "download.cloudflare-dl.cnae.top", domain: "download.cloudflare-dl.cnae.top" },
     { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
-    { name: "proxyip.fxxk.dedyn.io", domain: "proxyip.fxxk.dedyn.io" },
+    { name: "na.877774.xyz", domain: "na.877774.xyz" },
     
     { name: "store.ubi.com", domain: "store.ubi.com" },
     { name: "shopify.com", domain: "shopify.com" },
