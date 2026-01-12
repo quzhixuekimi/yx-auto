@@ -1,79 +1,67 @@
-# 服务器优选工具 - 简化版
+# 服务器优选工具
 
+一个简化版的Cloudflare Workers优选工具，用来生成订阅链接。
 
-## 功能特性
+## 主要功能
 
--  **优选域名**：自动使用内置的优选域名列表
--  **优选IP**：15分钟优选一次
--  **GitHub优选**：从 GitHub 仓库获取优选IP列表
--  **节点生成**：支持生成 Clash、Surge、Quantumult 等格式的订阅
--  **客户端选择**：支持 Clash、Surge、Quantumult X 等多种客户端格式
--  **IPv4/IPv6 选择**：可选择使用 IPv4 或 IPv6 优选IP
--  **运营商筛选**：支持按移动、联通、电信筛选优选IP
+- 优选域名：内置了一些常用的优选域名
+- 优选IP：从wetest.vip获取动态IP，支持IPv4/IPv6
+- GitHub优选：可以从GitHub仓库拉取IP列表
+- 多协议支持：VLESS、Trojan、VMess
+- 多客户端格式：Clash、Surge、Quantumult X等
+- 运营商筛选：可以按移动/联通/电信筛选
 
-## 使用方法
+## 部署
 
-### 1. 部署到 Cloudflare Workers
+1. 去Cloudflare Dashboard，找到Workers & Pages
+2. 创建个新Worker
+3. 把`_worker.js`的代码复制进去
+4. 保存部署就完事了
 
-1. 登录 Cloudflare Dashboard
-2. 进入 Workers & Pages
-3. 创建新的 Worker
-4. 将 `worker.js` 的内容复制到编辑器
-5. 保存并部署
+## 使用
 
-### 2. 使用界面
+打开你的Worker地址，会看到一个界面：
 
+1. 填域名和UUID
+2. 选协议（VLESS/Trojan/VMess）
+3. 选客户端类型
+4. 点按钮生成订阅链接
 
-1. **输入域名**：输入您的 Cloudflare Workers 域名
-2. **输入UUID**：输入您的 UUID（格式：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx）
-3. **配置选项**：
-   - 启用优选域名：使用内置的优选域名列表
-   - 启用优选IP：从 wetest.vip 获取动态IP
-   - 启用GitHub优选：从 GitHub 获取优选IP
-   - 客户端选择：选择订阅格式（Base64/Clash/Surge/Quantumult X）
-   - IP版本选择：选择使用 IPv4 或 IPv6
-   - 运营商选择：选择移动、联通、电信运营商
-4. **生成订阅**：点击"生成订阅链接"按钮
+就这么简单。
 
-### 3. 订阅链接格式
+## 订阅链接格式
 
-生成的订阅链接格式为：
+生成的链接大概长这样：
 ```
 https://your-worker.workers.dev/{UUID}/sub?domain=your-domain.com&epd=yes&epi=yes&egi=yes
 ```
 
-### 4. 支持的订阅格式
+可以通过`&target=`参数指定输出格式：
+- `base64` - 默认格式
+- `clash` - Clash配置
+- `surge` - Surge配置  
+- `quantumult` - Quantumult配置
 
-在订阅链接后添加 `&target=` 参数可以指定格式：
+## URL参数
 
-- `&target=base64` - Base64 编码（默认）
-- `&target=clash` - Clash 配置
-- `&target=surge` - Surge 配置
-- `&target=quantumult` - Quantumult 配置
+所有配置都通过URL参数控制，不需要环境变量。
 
-## 配置说明
-
-### 环境变量（可选）
-
-无需配置环境变量，所有功能通过URL参数控制。
-
-### URL 参数
-
-- `domain`: 您的域名（必需）
-- `epd`: 启用优选域名（yes/no，默认：yes）
-- `epi`: 启用优选IP（yes/no，默认：yes）
-- `egi`: 启用GitHub优选（yes/no，默认：yes）
-- `piu`: 自定义优选IP来源URL（可选）
-- `target`: 订阅格式（base64/clash/surge/quantumult）
-- `ipv4`: 启用IPv4（yes/no，默认：yes）
-- `ipv6`: 启用IPv6（yes/no，默认：yes）
-- `ispMobile`: 启用移动运营商（yes/no，默认：yes）
-- `ispUnicom`: 启用联通运营商（yes/no，默认：yes）
-- `ispTelecom`: 启用电信运营商（yes/no，默认：yes）
+主要参数：
+- `domain` - 你的域名（必填）
+- `epd` - 启用优选域名（默认yes）
+- `epi` - 启用优选IP（默认yes）
+- `egi` - 启用GitHub优选（默认yes）
+- `piu` - 自定义IP来源URL（可选）
+- `ev` - 启用VLESS（默认yes）
+- `et` - 启用Trojan（默认no）
+- `mess` - 启用VMess（默认no，注意不是vm，会被屏蔽）
+- `ipv4/ipv6` - IP版本选择（默认都开启）
+- `ispMobile/ispUnicom/ispTelecom` - 运营商筛选（默认都开启）
+- `target` - 输出格式（base64/clash/surge/quantumult）
 
 ## 注意事项
 
-1. **这不是代理工具**：此工具仅用于生成订阅链接，不提供代理功能
-2. **需要配合其他服务**：生成的节点需要配合其他代理服务使用
-3. **域名要求**：输入的域名应该是您实际使用的 服务器 域名
-4. **UUID格式**：UUID 必须是标准的 UUID v4 格式
+- 这只是一个订阅生成工具，不提供代理服务
+- 生成的节点需要配合你自己的服务器使用
+- UUID必须是标准格式（xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx）
+- VMess参数用的是`mess`不是`vm`，因为`vm`会被某些地方屏蔽
