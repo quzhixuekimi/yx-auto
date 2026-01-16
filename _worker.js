@@ -21,7 +21,7 @@ const directDomains = [
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
 
-    { name: "download.cloudflare-dl.cnae.top", domain: "download.cloudflare-dl.cnae.top" },
+    { name: "download.cloudflare-dl.byoip.top", domain: "download.cloudflare-dl.byoip.top" },
     { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
