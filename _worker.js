@@ -23,17 +23,13 @@ const directDomains = [
     { name: "cloudflare-ip.mofashi.ltd", domain: "cloudflare-ip.mofashi.ltd" },
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
-
     { name: "download.cloudflare-dl.byoip.top", domain: "download.cloudflare-dl.byoip.top" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
-    { name: "nc.gocada.co", domain: "nc.gocada.co" },
     
     { name: "na.877774.xyz", domain: "na.877774.xyz" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "skk.moe", domain: "skk.moe" },
-    { name: "www.4chan.org", domain: "www.4chan.org" },
-    
     { name: "www.whoer.net", domain: "www.whoer.net" },
     { name: "www.csgo.com", domain: "www.csgo.com" },
     { name: "www.ipget.net", domain: "www.ipget.net" },
