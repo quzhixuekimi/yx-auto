@@ -20,24 +20,20 @@ let customECHDomain = 'cloudflare-ech.com';
 // 默认优选域名列表
 const directDomains = [
     { name: "cf.0sm.com", domain: "cf.0sm.com" },
-    { name: "cfip.1323123.xyz", domain: "cfip.1323123.xyz" },
     { name: "cloudflare-ip.mofashi.ltd", domain: "cloudflare-ip.mofashi.ltd" },
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
 
     { name: "download.cloudflare-dl.byoip.top", domain: "download.cloudflare-dl.byoip.top" },
-    { name: "fbi.gov", domain: "fbi.gov" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
-    { name: "na.877774.xyz", domain: "na.877774.xyz" },
+    { name: "nc.gocada.co", domain: "nc.gocada.co" },
     
+    { name: "na.877774.xyz", domain: "na.877774.xyz" },
     { name: "shopify.com", domain: "shopify.com" },
-    { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
-    { name: "saas.sin.fan", domain: "saas.sin.fan" },
     { name: "skk.moe", domain: "skk.moe" },
     { name: "www.4chan.org", domain: "www.4chan.org" },
     
-    { name: "www.iakeys.com", domain: "www.iakeys.com" },
     { name: "www.whoer.net", domain: "www.whoer.net" },
     { name: "www.csgo.com", domain: "www.csgo.com" },
     { name: "www.ipget.net", domain: "www.ipget.net" },
