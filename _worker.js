@@ -26,18 +26,18 @@ const directDomains = [
     { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
 
     { name: "download.cloudflare-dl.byoip.top", domain: "download.cloudflare-dl.byoip.top" },
-    { name: "freeyx.cloudflare88.eu.org", domain: "freeyx.cloudflare88.eu.org" },
+    { name: "fbi.gov", domain: "fbi.gov" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
     { name: "na.877774.xyz", domain: "na.877774.xyz" },
     
-    { name: "store.ubi.com", domain: "store.ubi.com" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "sub.danfeng.eu.org", domain: "sub.danfeng.eu.org" },
     { name: "saas.sin.fan", domain: "saas.sin.fan" },
     { name: "skk.moe", domain: "skk.moe" },
+    { name: "www.4chan.org", domain: "www.4chan.org" },
     
-    { name: "xn--b6gac.eu.org", domain: "xn--b6gac.eu.org" },
+    { name: "www.iakeys.com", domain: "www.iakeys.com" },
     { name: "www.whoer.net", domain: "www.whoer.net" },
     { name: "www.csgo.com", domain: "www.csgo.com" },
     { name: "www.ipget.net", domain: "www.ipget.net" },
