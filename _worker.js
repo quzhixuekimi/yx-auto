@@ -20,7 +20,7 @@ let customECHDomain = 'cloudflare-ech.com';
 // 默认优选域名列表
 const directDomains = [
     { name: "cf.0sm.com", domain: "cf.0sm.com" },
-    { name: "cdn.xn--b6gac.eu.org", domain: "cdn.xn--b6gac.eu.org" },
+    { name: "cdn.2020111.xyz", domain: "cdn.2020111.xyz" },
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cdns.doon.eu.org", domain: "cdns.doon.eu.org" },
     { name: "download.cloudflare-dl.byoip.top", domain: "download.cloudflare-dl.byoip.top" },
