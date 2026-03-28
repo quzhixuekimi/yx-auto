@@ -32,7 +32,7 @@ const directDomains = [
     { name: "skk.moe", domain: "skk.moe" },
     { name: "www.whoer.net", domain: "www.whoer.net" },
     { name: "www.csgo.com", domain: "www.csgo.com" },
-    { name: "www.ipget.net", domain: "www.ipget.net" },
+    { name: "www.visa.com.sg", domain: "www.visa.com.sg" },
     { name: "www.okcupid.com", domain: "www.okcupid.com" }
 ];
 
