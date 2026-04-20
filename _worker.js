@@ -23,17 +23,15 @@ const directDomains = [
     { name: "cm.cloudflare.cnae.topp", domain: "cm.cloudflare.cnae.top" },
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cf.zhetengsha.eu.org", domain: "cf.zhetengsha.eu.org" },
-    { name: "download.cloudflare-dl.byoip.top", domain: "download.cloudflare-dl.byoip.top" },
+    { name: "eur.877774.xyz", domain: "eur.877774.xyz" },
     { name: "ip.sb", domain: "ip.sb" },
-    { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
     
+    { name: "mfa.gov.ua", domain: "mfa.gov.ua" },
     { name: "na.877774.xyz", domain: "na.877774.xyz" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "skk.moe", domain: "skk.moe" },
     { name: "www.whoer.net", domain: "www.whoer.net" },
-    { name: "www.csgo.com", domain: "www.csgo.com" },
-    { name: "www.visa.com.sg", domain: "www.visa.com.sg" },
-    { name: "www.okcupid.com", domain: "www.okcupid.com" }
+    { name: "www.csgo.com", domain: "www.csgo.com" }
 ];
 
 // 默认优选IP来源URL
