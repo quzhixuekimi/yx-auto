@@ -25,12 +25,12 @@ const directDomains = [
     { name: "cf.zhetengsha.eu.org", domain: "cf.zhetengsha.eu.org" },
     { name: "eur.877774.xyz", domain: "eur.877774.xyz" },
     { name: "ip.sb", domain: "ip.sb" },
-    
+
+    { name: "log.bpminecraft.com", domain: "log.bpminecraft.com" },
     { name: "na.877774.xyz", domain: "na.877774.xyz" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "skk.moe", domain: "skk.moe" },
     { name: "www.whoer.net", domain: "www.whoer.net" },
-    { name: "www.d-555.com", domain: "www.d-555.com" },
     { name: "www.csgo.com", domain: "www.csgo.com" }
 ];
 
