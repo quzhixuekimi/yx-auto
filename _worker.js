@@ -19,17 +19,15 @@ let customECHDomain = 'cloudflare-ech.com';
 
 // 默认优选域名列表
 const directDomains = [
-    { name: "cf.0sm.com", domain: "cf.0sm.com" },
     { name: "cm.cloudflare.cnae.topp", domain: "cm.cloudflare.cnae.top" },
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cf.zhetengsha.eu.org", domain: "cf.zhetengsha.eu.org" },
     { name: "eur.877774.xyz", domain: "eur.877774.xyz" },
     { name: "ip.sb", domain: "ip.sb" },
-
-    { name: "log.bpminecraft.com", domain: "log.bpminecraft.com" },
-    { name: "na.877774.xyz", domain: "na.877774.xyz" },
+    
     { name: "shopify.com", domain: "shopify.com" },
     { name: "skk.moe", domain: "skk.moe" },
+    { name: "time.cloudflare.com", domain: "time.cloudflare.com" },
     { name: "www.whoer.net", domain: "www.whoer.net" },
     { name: "www.csgo.com", domain: "www.csgo.com" }
 ];
