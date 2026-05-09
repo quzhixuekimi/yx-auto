@@ -22,7 +22,6 @@ const directDomains = [
     { name: "cm.cloudflare.cnae.topp", domain: "cm.cloudflare.cnae.top" },
     { name: "ct.cloudflare.byoip.top", domain: "ct.cloudflare.byoip.top" },
     { name: "cf.zhetengsha.eu.org", domain: "cf.zhetengsha.eu.org" },
-    { name: "eur.877774.xyz", domain: "eur.877774.xyz" },
     { name: "ip.sb", domain: "ip.sb" },
     { name: "shopify.com", domain: "shopify.com" },
     { name: "skk.moe", domain: "skk.moe" },
